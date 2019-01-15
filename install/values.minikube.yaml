@@ -1,0 +1,35 @@
+rootPassword: &rootPassword OtqNuvtvWeJm
+mysqlUser: &mysqlUser d3user
+mysqlPassword: &mysqlPassword gUNup0CdkTio
+mysqlDb: &mysqlDb d3db
+jdbc: &jdbc jdbc:mysql://d3env-mysql-service:3306/d3db?useUnicode=true&characterEncoding=utf-8
+
+
+blizzardClientId: &blizzardClientId YOUR_CLIENT_ID
+blizzardSecret: &blizzardSecret YOUR_CLIENT_SECRET
+
+mysql-service:
+  imageTag: 5.7.14
+  mysqlRootPassword: *rootPassword
+  mysqlUser: *mysqlUser
+  mysqlPassword: *mysqlPassword
+  mysqlDatabase: *mysqlDb
+  configurationFiles:
+   mysql.cnf: |-
+      [mysqld]
+      character-set-server=utf8
+      collation-server=utf8_general_ci
+d3web:
+  image:
+    repository: 192.168.39.1:5000/d3web
+
+d3hard:
+  image:
+    repository: 192.168.39.1:5000/d3hard
+  db:
+    jdbc: *jdbc
+    username: *mysqlUser
+    password: *mysqlPassword
+  blizzard:
+    clientId: *blizzardClientId
+    secret: *blizzardSecret

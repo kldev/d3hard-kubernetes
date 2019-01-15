@@ -1,0 +1,1 @@
+helm install -f values.minikube.yaml -n d3env .

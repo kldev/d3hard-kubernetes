@@ -1,0 +1,22 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: update-player-account
+spec:
+  schedule: "0 1 * * *" # o pierwszej w nocy kazdego dnia
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 3
+  jobTemplate:      
+    spec:
+      template:
+        spec:         
+          containers:      
+          - name: d3hard
+            image: "YOUR_DOCKER_REGISTRY/d3hard:v8"
+            command: ["java"]
+            args: ["-jar", "app.jar", "update", "--jdbc=jdbc:mysql://d3env-mysql-service:3306/d3db?useSSL=false&user=d3user&password=gUNup0CdkTio", "--url=http://d3env-d3hard:9000"]          
+          restartPolicy: Never
+
+
+
+

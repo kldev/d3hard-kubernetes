@@ -1,0 +1,11 @@
+dependencies:
+- name: d3hard
+  repository: file://../charts/d3hard
+  version: 3.0.0
+- name: d3web
+  repository: file://../charts/d3web
+  version: 3.0.0
+- name: mysql
+  repository: https://kubernetes-charts.storage.googleapis.com
+  version: 0.10.2
+  alias: mysql-service
